@@ -1,7 +1,7 @@
 import BaseImage from "../../Assets/base.png";
 import OverlayImage from "../../Assets/overlay.png";
 import React, { useEffect, useRef, useState } from 'react';
-import * as htmlToImage from 'html-to-image';
+import html2canvas from 'html2canvas';
 import axios from 'axios';
 import { ReactComponent as Loading } from '../../Assets/loading.svg';
 import { Buffer } from 'buffer';
@@ -9,6 +9,16 @@ import { Buffer } from 'buffer';
 const isUrl = (string) => {
     var res = string.match(/(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g);
     return (res !== null)
+};
+
+const getDataUrl = async (image) => {
+    let blob = await fetch(image).then(r => r.blob());
+    let dataUrl = await new Promise(resolve => {
+      let reader = new FileReader();
+      reader.onload = () => resolve(reader.result);
+      return reader.readAsDataURL(blob);      
+    });
+    return dataUrl;
 };
 
 export default function Main() {
@@ -63,10 +73,10 @@ export default function Main() {
             const isAlbum = search.includes("album");
 
 
-            await axiosClient.get(`https://api.spotify.com/v1/${isAlbum ? "albums" : "tracks"}/${trackIdByUrl}`).then(res => {
+            await axiosClient.get(`https://api.spotify.com/v1/${isAlbum ? "albums" : "tracks"}/${trackIdByUrl}`).then(async (res) => {
                 const url = isAlbum ? res.data.images[0].url : res.data.album.images[0].url;
                 tempImageUrl = url;
-                setImageUrl(url);
+                setImageUrl(await getDataUrl(url));
             }).catch(err => {
                 setImage("");
                 setError(true);
@@ -74,10 +84,10 @@ export default function Main() {
         }
         else {
             await axiosClient.get(`https://api.spotify.com/v1/search?q=${query}&type=${!trackSearch ? "album" : "track"}&limit=1`)
-                .then(res => {
+                .then(async (res) => {
                     const url = !trackSearch ? res.data.albums.items[0].images[0].url : res.data.tracks.items[0].album.images[0].url;
                     tempImageUrl = url;
-                    setImageUrl(url);
+                    setImageUrl(await getDataUrl(url));
                 })
                 .catch(err => {
                     setImage("");
@@ -90,9 +100,10 @@ export default function Main() {
             setLoading(false);
             if (!error && tempImageUrl !== "" && imageDiv.current) {
                 imageDiv.current.classList.remove("hidden");
-                htmlToImage.toPng(imageDiv.current, { canvasWidth: 500, canvasHeight: 500 })
-                    .then(function (dataUrl) {
-                        setImage(dataUrl);
+                html2canvas(imageDiv.current, { allowTaint:true, cacheBust: true, width: 500, height: 500 })
+                    .then(function (canvas) {
+                        const canvasAsDataUrl = canvas.toDataURL("image/png");
+                        setImage(canvasAsDataUrl);
                         imageDiv.current.classList.add("hidden");
                     })
                     .catch(function (error) {
@@ -100,7 +111,7 @@ export default function Main() {
                         setError(true);
                     });
             }
-        }, 500);
+        }, 1000);
 
     }
 
