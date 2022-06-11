@@ -100,7 +100,7 @@ export default function Main() {
             setLoading(false);
             if (!error && tempImageUrl !== "" && imageDiv.current) {
                 imageDiv.current.classList.remove("hidden");
-                html2canvas(imageDiv.current, { allowTaint:true, cacheBust: true, width: 300, height: 300 })
+                html2canvas(imageDiv.current, { allowTaint:true, cacheBust: true, width: 400, height: 400 })
                     .then(function (canvas) {
                         const canvasAsDataUrl = canvas.toDataURL("image/png");
                         setImage(canvasAsDataUrl);
@@ -147,11 +147,11 @@ export default function Main() {
                 {error ? <p>nada encontrado</p> : loading && <Loading className="m-auto" />}
                 {image &&
                     (<>
-                        <img src={image} className="w-full h-full max-h-[300px] max-w-[300px]" alt="Nanacita" />
+                        <img src={image} className="w-full h-full max-h-[400px] max-w-[400px]" alt="Nanacita" />
                         <button onClick={downloadImage} className="mt-5 w-[50%] self-center h-12 p-2 rounded-lg bg-gray-200 hover:bg-gray-400 transition-all ease-in-out">baixar</button>
                     </>)
                 }
-                <div ref={imageDiv} className="hidden relative w-[300px] h-[300px] bg-cover" style={{ backgroundImage: `url(${BaseImage})` }}>
+                <div ref={imageDiv} className="hidden relative w-[800px] scale-50 h-[800px] bg-cover" style={{ backgroundImage: `url(${BaseImage})` }}>
                     <div className="w-[49.01%] h-[49.01%] absolute z-1 rotate-[14.6deg] left-[43.65%] top-[16.90%] bg-cover" style={{ backgroundImage: `url(${imageUrl})` }} />
                     <img src={OverlayImage} className="absolute z-2 w-full h-full" alt="Overlay" />
                 </div>
