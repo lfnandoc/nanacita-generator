@@ -1,19 +1,19 @@
 {
   "files": {
-    "main.css": "/nanacita-generator/static/css/main.07b5f743.css",
-    "main.js": "/nanacita-generator/static/js/main.89b5ef81.js",
+    "main.css": "/nanacita-generator/static/css/main.c823b7d8.css",
+    "main.js": "/nanacita-generator/static/js/main.dbd2a7ab.js",
     "static/js/787.3e8ff82a.chunk.js": "/nanacita-generator/static/js/787.3e8ff82a.chunk.js",
     "static/media/base.png": "/nanacita-generator/static/media/base.f2f7033783f20e725cf2.png",
     "static/media/overlay.png": "/nanacita-generator/static/media/overlay.e1d8c9160a72f112ebb9.png",
     "static/media/logo.svg": "/nanacita-generator/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
     "static/media/loading.svg": "/nanacita-generator/static/media/loading.d336b3b811f618df2903bb83ef2a7170.svg",
     "index.html": "/nanacita-generator/index.html",
-    "main.07b5f743.css.map": "/nanacita-generator/static/css/main.07b5f743.css.map",
-    "main.89b5ef81.js.map": "/nanacita-generator/static/js/main.89b5ef81.js.map",
+    "main.c823b7d8.css.map": "/nanacita-generator/static/css/main.c823b7d8.css.map",
+    "main.dbd2a7ab.js.map": "/nanacita-generator/static/js/main.dbd2a7ab.js.map",
     "787.3e8ff82a.chunk.js.map": "/nanacita-generator/static/js/787.3e8ff82a.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.07b5f743.css",
-    "static/js/main.89b5ef81.js"
+    "static/css/main.c823b7d8.css",
+    "static/js/main.dbd2a7ab.js"
   ]
 }
