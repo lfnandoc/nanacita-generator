@@ -147,7 +147,7 @@ export default function Main() {
                 {error ? <p>nada encontrado</p> : loading && <Loading className="m-auto" />}
                 {image &&
                     (<>
-                        <img src={image} className="w-full h-full" alt="Nanacita" />
+                        <img src={image} className="w-full h-full max-h-[512px] max-w-[512px]" alt="Nanacita" />
                         <button onClick={downloadImage} className="mt-5 w-[50%] self-center h-12 p-2 rounded-lg bg-gray-200 hover:bg-gray-400 transition-all ease-in-out">baixar</button>
                     </>)
                 }
