@@ -18,7 +18,7 @@ jobs:
           envkey_REACT_APP_SPOTIFY_CLIENT_SECRET: ${{ secrets.REACT_APP_SPOTIFY_CLIENT_SECRET }}
           file_name: .env
           fail_on_empty: false
-      - run:  npm ci && env-cmd npm run build                  
+      - run:  npm ci && npx env-cmd && npm run build                  
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
