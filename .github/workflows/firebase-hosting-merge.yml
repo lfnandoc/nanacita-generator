@@ -10,15 +10,15 @@ jobs:
   build_and_deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v2      
+      - run:  npm ci && npm run build            
       - name: Make envfile
         uses: SpicyPizza/create-envfile@v1.3
         with:        
           envkey_REACT_APP_SPOTIFY_CLIENT_ID: ${{ secrets.REACT_APP_SPOTIFY_CLIENT_ID }}
           envkey_REACT_APP_SPOTIFY_CLIENT_SECRET: ${{ secrets.REACT_APP_SPOTIFY_CLIENT_SECRET }}
           file_name: .env
-          fail_on_empty: false
-      - run:  npm ci && npx env-cmd -f /github/workspace/.env && npm run build                  
+          fail_on_empty: false      
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
